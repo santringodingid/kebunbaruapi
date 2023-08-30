@@ -89,6 +89,6 @@ class Payment extends RestController
 
 		$this->response( [
 			'status' => true,
-		], 200);
+		], 204);
 	}
 }
