@@ -32,7 +32,15 @@ class Payment extends RestController
 			$this->response( [
 				'status' => false,
 				'error' => 'Field is required',
-				'msg' => 'Member ID, Instansi Code or Payment List Code harus diisi'
+				'msg' => 'Member ID, Instansi Code atau Payment List Code harus diisi'
+			], RestController::HTTP_BAD_REQUEST);
+		}
+
+		if ($instansiCode != '1391') {
+			$this->response( [
+				'status' => false,
+				'error' => 'Unknown data',
+				'msg' => 'Instansi Code tidak dikenal'
 			], RestController::HTTP_BAD_REQUEST);
 		}
 
@@ -46,7 +54,7 @@ class Payment extends RestController
 		}
 		$tipe = $checkID->tipe_santri;
 
-		if ($paymentListCode === 'PY-01') {
+		if ($paymentListCode === '139101') {
 			$checkRate = $this->pm->checkPaymentPy01($memberId);
 			if (!$checkRate['status']) {
 				$this->response( [
@@ -83,7 +91,7 @@ class Payment extends RestController
 		$noref = $this->post('noref');
 
 		$this->pm->store($paymentListCode, $nominal, $memberId, $noref);
-		if ($paymentListCode === 'PY-01') {
+		if ($paymentListCode === '139101') {
 			$this->pm->storePayment($nominal, $memberId);
 		}
 

@@ -112,7 +112,8 @@ class PaymentModel extends CI_Model
 						'nik' => $check->nik,
 						'status' => 'LUNAS',
 						'tahap' => 2,
-						'user' => ($check->tipe == 2) ? 'MARIA NUR HAYATI' : 'ABD. KHOFI'
+						'user' => ($check->tipe == 2) ? 'MARIA NUR HAYATI' : 'ABD. KHOFI',
+						'merchant' => 'EMAAL'
 					]);
 
 					$dataDetail = [];
