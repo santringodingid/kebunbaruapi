@@ -72,13 +72,10 @@ class PaymentModel extends CI_Model
 		];
 	}
 
-	public function store($id, $nominal)
+	public function store($id, $nominal, $idSantri, $noref)
 	{
-		$memberId = $this->input->post('member_id');
-		$noref = $this->input->post('noref');
-
 		$this->db->insert('payment_emaal', [
-			'student_id' => $memberId,
+			'student_id' => $idSantri,
 			'nominal' => $nominal,
 			'paymentlist_id' => $id,
 			'noref' => $noref,
@@ -86,7 +83,7 @@ class PaymentModel extends CI_Model
 		]);
 	}
 
-	public function storePayment($id, $nominal, $idSantri)
+	public function storePayment($nominal, $idSantri)
 	{
 		$period = $this->getPeriod();
 		if ($period) {

@@ -79,15 +79,16 @@ class Payment extends RestController
 	{
 		$paymentListCode = $this->post('paymentlist_code');
 		$nominal = $this->post('nominal');
-		$memberId = $this->input->post('member_id');
+		$memberId = $this->post('member_id');
+		$noref = $this->post('noref');
 
-		$this->pm->store($paymentListCode, $nominal);
+		$this->pm->store($paymentListCode, $nominal, $memberId, $noref);
 		if ($paymentListCode === 'PY-01') {
-			$this->pm->storePayment($paymentListCode, $nominal, $memberId);
+			$this->pm->storePayment($nominal, $memberId);
 		}
 
 		$this->response( [
 			'status' => true,
-		], 204);
+		], 200);
 	}
 }
