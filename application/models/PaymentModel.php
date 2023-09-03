@@ -74,12 +74,17 @@ class PaymentModel extends CI_Model
 
 	public function store($id, $nominal, $idSantri, $noref)
 	{
+		$period = $this->getPeriod();
+		$period = $period->tahun_periode;
+
 		$this->db->insert('payment_emaal', [
 			'student_id' => $idSantri,
 			'nominal' => $nominal,
 			'paymentlist_id' => $id,
 			'noref' => $noref,
-			'created_at' => date('Y-m-d H:i:s')
+			'period' => $period,
+			'created_at' => date('Y-m-d H:i:s'),
+			'caption' => strtoupper($this->getCaption())
 		]);
 	}
 
@@ -182,6 +187,32 @@ class PaymentModel extends CI_Model
 		}
 
 		return '1441-01-01';
+	}
+
+	public function getCaption()
+	{
+		$hijri = $this->getHijri();
+
+		$split = explode('-', $hijri);
+
+		$month = $split[1];
+
+		$months = [
+			'01' => 'Muharram',
+			'02' => 'Shafar',
+			'03' => 'Rabi\'ul Awal',
+			'04' => 'Rabi\'ul Akhir',
+			'05' => 'Jumadal Ula',
+			'06' => 'Jumadal Akhirah',
+			'07' => 'Rajab',
+			'08' => 'Sya\'ban',
+			'09' => 'Ramadhan',
+			'10' => 'Syawal',
+			'11' => 'Dzul Qo\'dah',
+			'12' => 'Dzul Hijjah',
+		];
+
+		return $months[$month];
 	}
 }
 

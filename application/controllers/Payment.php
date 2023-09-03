@@ -54,7 +54,7 @@ class Payment extends RestController
 		}
 		$tipe = $checkID->tipe_santri;
 
-		if ($paymentListCode === '139101') {
+		if ($paymentListCode == '139101') {
 			$checkRate = $this->pm->checkPaymentPy01($memberId);
 			if (!$checkRate['status']) {
 				$this->response( [
@@ -74,10 +74,12 @@ class Payment extends RestController
 			}
 		}
 
+		$caption = $this->pm->getCaption();
+
 		$this->response( [
 			'status' => true,
 			'member_id' => $checkID->id_santri,
-			'member_name' => $checkID->nama_santri,
+			'member_name' => $checkID->nama_santri.' | '.strtoupper($caption),
 			'nominal' => $checkRate['nominal'],
 			'payment' => 1
 		], RestController::HTTP_OK);
