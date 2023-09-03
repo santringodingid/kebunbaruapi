@@ -75,11 +75,16 @@ class Payment extends RestController
 		}
 
 		$caption = $this->pm->getCaption();
+		if ($paymentListCode == '139102') {
+			$member = $checkID->nama_santri.' | '.strtoupper($caption);
+		}else{
+			$member = $checkID->nama_santri;
+		}
 
 		$this->response( [
 			'status' => true,
 			'member_id' => $checkID->id_santri,
-			'member_name' => $checkID->nama_santri.' | '.strtoupper($caption),
+			'member_name' => $member,
 			'nominal' => $checkRate['nominal'],
 			'payment' => 1
 		], RestController::HTTP_OK);
