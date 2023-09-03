@@ -76,6 +76,7 @@ class PaymentModel extends CI_Model
 	{
 		$period = $this->getPeriod();
 		$period = $period->tahun_periode;
+		$caption = $this->getCaption();
 
 		$this->db->insert('payment_emaal', [
 			'student_id' => $idSantri,
@@ -84,7 +85,7 @@ class PaymentModel extends CI_Model
 			'noref' => $noref,
 			'period' => $period,
 			'created_at' => date('Y-m-d H:i:s'),
-			'caption' => strtoupper($this->getCaption())
+			'caption' => strtoupper($caption)
 		]);
 	}
 
