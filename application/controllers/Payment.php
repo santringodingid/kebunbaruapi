@@ -69,7 +69,7 @@ class Payment extends RestController
 				$this->response( [
 					'status' => false,
 					'error' => 'Service not available',
-					'msg' => 'Pelayanan pembayaran belum tersedia'
+					'msg' => 'Layanan pembayaran belum tersedia'
 				], RestController::HTTP_BAD_REQUEST);
 			}
 		}
